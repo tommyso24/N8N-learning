@@ -44,7 +44,7 @@ const CLASSIFICATION = {
       "zhang-yiming-perspective",
       "zhangxuefeng-perspective",
     ],
-    default_model: "deepseek-chat",
+    default_model: "deepseek-v4-flash",
     default_provider: "deepseek",
     tools_needed: [],
   },
@@ -52,7 +52,7 @@ const CLASSIFICATION = {
   // T2 = 提示词 + 联网工具，n8n 中需要前置 WebSearch / HTTP 节点
   T2: {
     skills: ["khazix-writer", "aihot"],
-    default_model: "deepseek-chat",
+    default_model: "deepseek-v4-flash",
     default_provider: "deepseek",
     tools_needed: ["web_search"],
   },
@@ -60,7 +60,7 @@ const CLASSIFICATION = {
   // T3 = 提示词 + 脚本 + 文件副作用，n8n 中需要拆解工作流
   T3: {
     skills: ["hv-analysis", "huashu-nuwa"],
-    default_model: "deepseek-chat",
+    default_model: "deepseek-v4-flash",
     default_provider: "deepseek",
     tools_needed: ["web_search", "file_output"],
   },
@@ -181,7 +181,7 @@ function translate(skillName) {
     system_prompt: body.trim(),
     tools_needed: classification.tools_needed || [],
     default_provider: classification.default_provider || "deepseek",
-    default_model: classification.default_model || "deepseek-chat",
+    default_model: classification.default_model || "deepseek-v4-flash",
     has_extras: extras.length > 0 ? extras : undefined,
     source: `~/.claude/skills/${skillName}/SKILL.md`,
     notes: extras.length

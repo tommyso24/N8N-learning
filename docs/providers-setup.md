@@ -8,7 +8,8 @@
 
 | provider | 默认模型 ID | endpoint | API 文档 | body 格式 | 当前状态 |
 |---|---|---|---|---|---|
-| **deepseek** | `deepseek-chat` | `https://api.deepseek.com/v1/chat/completions` | https://api-docs.deepseek.com/ | OpenAI 兼容 | ✅ **已有 key（默认）** |
+| **deepseek** | `deepseek-v4-flash` | `https://api.deepseek.com/v1/chat/completions` | https://api-docs.deepseek.com/ | OpenAI 兼容 | ✅ **已有 key（默认）** |
+| | | | | | 备注: `deepseek-v4-flash` 是当前主力模型（替代旧的 `deepseek-chat`，后者将于 2026-07-24 弃用）。也可选 `deepseek-v4-pro` 做复杂任务。|
 | **openai** | `gpt-4o` | `https://api.openai.com/v1/chat/completions` | https://platform.openai.com/docs/api-reference | OpenAI 原生 | ⏳ 槽位待填 |
 | **anthropic** | `claude-opus-4-5`（或更新版本） | `https://api.anthropic.com/v1/messages` | https://docs.anthropic.com/en/api/messages | Anthropic 专用（`system` 独立字段） | ⏳ 槽位待填 |
 | **gemini** | `gemini-2.0-pro` | `https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent` | https://ai.google.dev/api/rest | Google 专用（`contents` 数组） | ⏳ 槽位待填 |
@@ -41,7 +42,7 @@
 **Body 模板（OpenAI 兼容）**：
 ```json
 {
-  "model": "{{ $json.model || 'deepseek-chat' }}",
+  "model": "{{ $json.model || 'deepseek-v4-flash' }}",
   "messages": [
     { "role": "system", "content": "{{ $json.system_prompt }}" },
     { "role": "user",   "content": "{{ $json.question }}" }

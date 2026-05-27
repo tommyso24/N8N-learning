@@ -9,7 +9,7 @@
     "file_output"
   ],
   "default_provider": "deepseek",
-  "default_model": "deepseek-chat",
+  "default_model": "deepseek-v4-flash",
   "has_extras": [
     "assets",
     "examples",

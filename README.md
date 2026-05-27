@@ -70,7 +70,7 @@ node scripts/translate.mjs steve-jobs-perspective
 
 | provider | 默认模型 | 当前状态 |
 |---|---|---|
-| deepseek | deepseek-chat | ✅ 已有 key（**默认**） |
+| deepseek | deepseek-v4-flash | ✅ 已有 key（**默认**） |
 | openai | gpt-4o | ⏳ 槽位待填 |
 | anthropic | claude-opus-4-5 | ⏳ 槽位待填 |
 | gemini | gemini-2.0-pro | ⏳ 槽位待填 |

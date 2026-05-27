@@ -8,7 +8,7 @@
     "web_search"
   ],
   "default_provider": "deepseek",
-  "default_model": "deepseek-chat",
+  "default_model": "deepseek-v4-flash",
   "source": "~/.claude/skills/aihot/SKILL.md",
   "notes": "纯提示词，无外部资源"
 }

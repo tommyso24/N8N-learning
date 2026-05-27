@@ -165,7 +165,7 @@ Switch 节点的 **Output 0** 接出来 → 加 **HTTP Request**
 - **JSON Body**：
   ```
   ={
-    "model": {{ $('Form Trigger').item.json.model ? JSON.stringify($('Form Trigger').item.json.model) : '"deepseek-chat"' }},
+    "model": {{ $('Form Trigger').item.json.model ? JSON.stringify($('Form Trigger').item.json.model) : '"deepseek-v4-flash"' }},
     "messages": [
       { "role": "system", "content": {{ JSON.stringify($json.system_prompt) }} },
       { "role": "user",   "content": {{ JSON.stringify($('Form Trigger').item.json.question) }} }
