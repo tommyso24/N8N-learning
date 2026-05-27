@@ -6,34 +6,22 @@
 
 ---
 
-## 0. 前置准备（5 分钟）
+## 0. 前置准备
 
-### 0.1 把 skills-registry 推到 GitHub
+### 0.1 GitHub 仓库 — ✅ 已完成
 
-n8n 在 VPS 上拿不到本地文件，必须通过 HTTPS 拉。
+仓库已建并推完：https://github.com/tommyso24/N8N-learning
 
-```bash
-cd /Users/supeng/coding/N8N-leaning
-git init
-git add .
-git commit -m "init: skills registry M0"
-
-# 在 GitHub 上建一个仓库（建议私有也行，但 n8n 拉 raw 需要 token；建议公开）
-# 假设叫 N8N-leaning，用户名是 yourname
-git remote add origin git@github.com:yourname/N8N-leaning.git
-git push -u origin main
-```
-
-推完之后，记下 raw URL 模板：
+n8n 用这个 raw URL 模板拉 skill JSON：
 ```
 https://raw.githubusercontent.com/tommyso24/N8N-learning/main/skills-registry/<skill>.json
 ```
 
-如果是**私有仓库**，要么改成 GitHub PAT 认证，要么改用一个公开的 gist/repo。最简单是用公开仓库（skill 内容本身就是用来分享的）。
+> 后续如果改了本地的 SKILL.md 或 `skills-registry/`，跑 `git add . && git commit && git push`，n8n 下次执行就拉到新版本（GitHub raw 有约 5 分钟 CDN 缓存）。
 
 ### 0.2 拿到 Deepseek API key
 
-去 https://platform.deepseek.com/ → 注册 → API Keys → Create new secret key。复制下来。
+去 https://platform.deepseek.com/ → 注册 → API Keys → Create new secret key。复制下来备用。
 
 ---
 
