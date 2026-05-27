@@ -26,7 +26,7 @@ git push -u origin main
 
 推完之后，记下 raw URL 模板：
 ```
-https://raw.githubusercontent.com/<yourname>/N8N-leaning/main/skills-registry/<skill>.json
+https://raw.githubusercontent.com/tommyso24/N8N-learning/main/skills-registry/<skill>.json
 ```
 
 如果是**私有仓库**，要么改成 GitHub PAT 认证，要么改用一个公开的 gist/repo。最简单是用公开仓库（skill 内容本身就是用来分享的）。
@@ -118,9 +118,9 @@ x-mastery-mentor
 ### 4.2 配置
 
 - **Method**：`GET`
-- **URL**：把 `<yourname>` 替换成你的 GitHub 用户名
+- **URL**：
   ```
-  https://raw.githubusercontent.com/<yourname>/N8N-leaning/main/skills-registry/{{ $json.skill }}.json
+  https://raw.githubusercontent.com/tommyso24/N8N-learning/main/skills-registry/{{ $json.skill }}.json
   ```
 - **Authentication**：`None`
 - **Response Format**：`JSON`（n8n 会自动 parse）
