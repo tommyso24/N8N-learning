@@ -3,3 +3,6 @@ node_modules/
 .env
 .env.local
 *.log
+
+# MCP config 含 n8n API key，不能进 GitHub
+.mcp.json
