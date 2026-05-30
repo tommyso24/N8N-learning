@@ -1,0 +1,477 @@
+{
+  "name": "01-perspective-single",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Perspective 问答",
+        "formDescription": "选一个思维顾问，提一个问题。慢慢想，深处见。",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Question",
+              "fieldType": "textarea",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Skill",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "steve-jobs-perspective"
+                  },
+                  {
+                    "option": "elon-musk-perspective"
+                  },
+                  {
+                    "option": "munger-perspective"
+                  },
+                  {
+                    "option": "naval-perspective"
+                  },
+                  {
+                    "option": "taleb-perspective"
+                  },
+                  {
+                    "option": "feynman-perspective"
+                  },
+                  {
+                    "option": "paul-graham-perspective"
+                  },
+                  {
+                    "option": "andrej-karpathy-perspective"
+                  },
+                  {
+                    "option": "ilya-sutskever-perspective"
+                  },
+                  {
+                    "option": "mrbeast-perspective"
+                  },
+                  {
+                    "option": "zhang-yiming-perspective"
+                  },
+                  {
+                    "option": "zhangxuefeng-perspective"
+                  },
+                  {
+                    "option": "sun-yuchen-perspective"
+                  },
+                  {
+                    "option": "trump-perspective"
+                  },
+                  {
+                    "option": "x-mastery-mentor"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Provider",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "deepseek"
+                  },
+                  {
+                    "option": "openai"
+                  },
+                  {
+                    "option": "anthropic"
+                  },
+                  {
+                    "option": "gemini"
+                  },
+                  {
+                    "option": "kimi"
+                  },
+                  {
+                    "option": "minimax"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Language",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "中文"
+                  },
+                  {
+                    "option": "English"
+                  },
+                  {
+                    "option": "Auto (跟随问题语言)"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Model",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "deepseek-v4-flash"
+                  },
+                  {
+                    "option": "deepseek-v4-pro"
+                  },
+                  {
+                    "option": "gpt-4o"
+                  },
+                  {
+                    "option": "gpt-5"
+                  },
+                  {
+                    "option": "claude-opus-4-5"
+                  },
+                  {
+                    "option": "claude-sonnet-4-5"
+                  },
+                  {
+                    "option": "gemini-2.0-pro"
+                  },
+                  {
+                    "option": "gemini-2.0-flash"
+                  },
+                  {
+                    "option": "moonshot-v1-32k"
+                  },
+                  {
+                    "option": "abab6.5-chat"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {
+          "buttonLabel": "提交问题",
+          "customCss": ":root { --primary-50:#EBF3FB; --primary-100:#D0E4F6; --primary-200:#A1C9ED; --primary-400:#4A90D9; --primary-500:#3A78C2; --primary-600:#2D61A5; --primary-700:#214A88; --aurora-1:#4A90D9; --aurora-2:#6FC9E8; --aurora-3:#B4A7E8; --aurora-4:#F0B4D8; --bg-page:#FAFBF9; --bg-card:#ffffff; --bg-inset:#F4F5F2; --bg-hover:#F4F6F9; --bg-active:#EBF3FB; --border:#ECEEE8; --border-strong:#DEE0D9; --text-primary:#1A1D20; --text-secondary:#4A5057; --text-tertiary:#8B8F86; --rule:#E2E4DD; --shadow-1:0 1px 2px rgba(16,24,40,0.04), 0 1px 3px rgba(16,24,40,0.06); --shadow-2:0 4px 8px -2px rgba(16,24,40,0.06), 0 2px 4px -2px rgba(16,24,40,0.04); --shadow-3:0 12px 24px -6px rgba(16,24,40,0.10), 0 4px 8px -4px rgba(16,24,40,0.06); --shadow-brand:0 6px 20px -6px rgba(74,144,217,0.4); }\nhtml, body { margin:0; padding:0; background:var(--bg-page); font-family:-apple-system, BlinkMacSystemFont, 'PingFang SC', 'HarmonyOS Sans SC', 'Microsoft YaHei', sans-serif; color:var(--text-primary); font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased; }\n* { box-sizing:border-box; }\n.form-container, .container, main, [class*=\"form-container\"] { max-width:560px !important; margin:80px auto !important; padding:48px !important; background:var(--bg-card) !important; border:1px solid var(--rule) !important; border-radius:16px !important; box-shadow:var(--shadow-1) !important; }\n@media (max-width:640px) { .form-container, .container, main, [class*=\"form-container\"] { margin:24px 16px !important; padding:28px 24px !important; } }\nh1, .form-title, [class*=\"title\"] { font-family:Georgia, 'Times New Roman', serif !important; font-style:italic !important; font-weight:400 !important; font-size:34px !important; letter-spacing:-0.02em !important; color:var(--text-primary) !important; margin:0 0 12px !important; background:linear-gradient(135deg, var(--text-primary) 0%, var(--primary-500) 70%, var(--aurora-3) 100%) !important; -webkit-background-clip:text !important; background-clip:text !important; -webkit-text-fill-color:transparent !important; }\n.form-description, [class*=\"description\"], h2:not(form h2) { color:var(--text-tertiary) !important; font-size:14px !important; margin:0 0 36px !important; font-weight:400 !important; line-height:1.6 !important; }\nform > div, .form-field, [class*=\"field-wrapper\"] { margin-bottom:20px !important; }\nlabel, .field-label { display:block !important; font-family:'SF Mono', ui-monospace, monospace !important; font-size:11px !important; font-weight:500 !important; letter-spacing:0.15em !important; text-transform:uppercase !important; color:var(--primary-500) !important; margin-bottom:8px !important; }\ninput[type=text], input[type=email], input[type=number], textarea, select { width:100% !important; padding:11px 14px !important; background:var(--bg-card) !important; border:1px solid var(--border-strong) !important; border-radius:10px !important; font-size:14px !important; color:var(--text-primary) !important; font-family:inherit !important; transition:border-color 200ms ease-out, box-shadow 200ms ease-out !important; outline:none !important; }\ntextarea { min-height:96px !important; resize:vertical !important; line-height:1.6 !important; }\ninput:focus, textarea:focus, select:focus { border-color:var(--primary-400) !important; box-shadow:0 0 0 4px rgba(74,144,217,0.12) !important; }\ninput::placeholder, textarea::placeholder { color:var(--text-tertiary) !important; }\n\n/* === Brand Book v2.1 §7.4 Select 下拉菜单 === */\nselect { appearance:none !important; -webkit-appearance:none !important; -moz-appearance:none !important; background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238B8F86' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>\") !important; background-repeat:no-repeat !important; background-position:right 14px center !important; background-size:14px 14px !important; padding-right:40px !important; cursor:pointer !important; }\nselect:hover { border-color:var(--text-tertiary) !important; }\nselect:focus { background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%233A78C2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>\") !important; }\nselect option { background:#fff !important; color:var(--text-primary) !important; padding:9px 14px !important; font-family:inherit !important; font-size:14px !important; }\nselect option:checked { background:var(--bg-active) !important; color:var(--primary-500) !important; font-weight:600 !important; }\nselect option:hover { background:var(--bg-hover) !important; }\n\n/* === n8n 可能使用的自定义下拉组件兼容 === */\n.multiselect, [class*=\"dropdown\"], [class*=\"select-\"]:not(select), [class*=\"vs__\"] { border-radius:10px !important; font-family:inherit !important; }\n.multiselect__tags, [class*=\"dropdown-trigger\"], [class*=\"select-trigger\"], .vs__dropdown-toggle { border-radius:10px !important; border:1px solid var(--border-strong) !important; background:var(--bg-card) !important; padding:9px 14px !important; min-height:42px !important; font-size:14px !important; color:var(--text-primary) !important; transition:border-color 200ms ease-out, box-shadow 200ms ease-out !important; }\n.multiselect--active .multiselect__tags, .multiselect__tags:focus-within, [class*=\"dropdown-trigger\"]:focus, [class*=\"select-trigger\"]:focus-within, .vs--open .vs__dropdown-toggle { border-color:var(--primary-400) !important; box-shadow:0 0 0 4px rgba(74,144,217,0.12) !important; }\n.multiselect__single, .multiselect__placeholder, .vs__selected { color:var(--text-primary) !important; font-size:14px !important; padding:0 !important; margin:0 !important; line-height:24px !important; }\n.multiselect__placeholder { color:var(--text-tertiary) !important; }\n.multiselect__select::before { border-color:var(--text-tertiary) transparent transparent !important; }\n.multiselect__content-wrapper, [class*=\"dropdown-menu\"], [class*=\"select-panel\"], .vs__dropdown-menu { border-radius:12px !important; border:1px solid var(--border) !important; background:var(--bg-card) !important; box-shadow:var(--shadow-3) !important; margin-top:6px !important; padding:6px !important; overflow:hidden !important; }\n.multiselect__option, [class*=\"dropdown-item\"], [class*=\"select-option\"], .vs__dropdown-option { padding:9px 14px 9px 18px !important; font-size:14px !important; color:var(--text-secondary) !important; border-radius:8px !important; position:relative !important; transition:background 160ms ease-out, color 160ms ease-out !important; cursor:pointer !important; }\n.multiselect__option::before, [class*=\"dropdown-item\"]::before, .vs__dropdown-option::before { content:'' !important; position:absolute !important; left:6px !important; top:50% !important; width:2px !important; height:16px !important; border-radius:2px !important; background:linear-gradient(180deg, var(--primary-400), var(--primary-600)) !important; transform:translateY(-50%) scaleY(0) !important; transition:transform 200ms ease-out !important; }\n.multiselect__option--highlight, .multiselect__option:hover, [class*=\"dropdown-item\"]:hover, [class*=\"select-option\"]:hover, .vs__dropdown-option--highlight { background:var(--bg-hover) !important; color:var(--text-primary) !important; }\n.multiselect__option--highlight::before, .multiselect__option:hover::before, [class*=\"dropdown-item\"]:hover::before, .vs__dropdown-option--highlight::before { transform:translateY(-50%) scaleY(1) !important; }\n.multiselect__option--selected, [class*=\"dropdown-item\"][aria-selected=\"true\"], [class*=\"select-option--selected\"], .vs__dropdown-option--selected { background:var(--bg-active) !important; color:var(--primary-500) !important; font-weight:600 !important; }\n.multiselect__option--selected::before, .vs__dropdown-option--selected::before { transform:translateY(-50%) scaleY(1) !important; }\n\nbutton[type=submit], .btn-primary, button.submit { background:linear-gradient(180deg, var(--primary-400), var(--primary-500)) !important; color:#fff !important; border:none !important; padding:12px 28px !important; font-size:14px !important; font-weight:600 !important; border-radius:10px !important; cursor:pointer !important; box-shadow:var(--shadow-brand), inset 0 1px 0 rgba(255,255,255,0.22) !important; transition:transform 150ms ease-out, box-shadow 150ms ease-out !important; margin-top:8px !important; }\nbutton[type=submit]:hover { transform:translateY(-1px) !important; box-shadow:0 10px 24px -6px rgba(74,144,217,0.48), inset 0 1px 0 rgba(255,255,255,0.22) !important; }\nbutton[type=submit]:active { transform:translateY(0) scale(0.97) !important; }\n[class*=\"required\"]::after, .required::after { color:var(--primary-500) !important; }\nfooter, [class*=\"powered\"], [class*=\"attribution\"] { color:var(--text-tertiary) !important; font-size:11px !important; letter-spacing:0.08em !important; text-transform:uppercase !important; font-family:'SF Mono', ui-monospace, monospace !important; }",
+          "path": "perspective"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        0,
+        -80
+      ],
+      "id": "7e9c2ee7-a07c-4bdb-b576-92d3d9b63a2d",
+      "name": "On form submission",
+      "webhookId": "9b5ff8fb-fd35-4334-997b-17de91f10bb5"
+    },
+    {
+      "parameters": {
+        "url": "=https://raw.githubusercontent.com/tommyso24/N8N-learning/main/skills-registry/{{ $json.Skill }}.json",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        224,
+        -80
+      ],
+      "id": "36daeee1-f621-4cc3-ab75-fca6bc2ed021",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('On form submission').item.json.Provider }}",
+                    "rightValue": "deepseek",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "a36243b8-98a5-4a7e-9c4d-558be8bc5711"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "deepseek"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "580f7ee9-6aa5-4b7f-9aca-5b49659ddeac",
+                    "leftValue": "={{ $('On form submission').item.json.Provider }}",
+                    "rightValue": "openai",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "openai"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f14a15d3-76dc-4d17-8599-b9d81ce818aa",
+                    "leftValue": "={{ $('On form submission').item.json.Provider }}",
+                    "rightValue": "anthropic",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "anthropic"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "7f2cceca-1423-48ae-a11e-411ebc5a21a0",
+                    "leftValue": "={{ $('On form submission').item.json.Provider }}",
+                    "rightValue": "gemini",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "gemini"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "de739bcd-cc3f-4fda-b1b2-5caed7172777",
+                    "leftValue": "={{ $('On form submission').item.json.Provider }}",
+                    "rightValue": "kimi",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "kimi"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b9c1b074-7398-421f-a1e5-2e057d56244a",
+                    "leftValue": "={{ $('On form submission').item.json.Provider }}",
+                    "rightValue": "minimax",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "minimax"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": 0
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        -144
+      ],
+      "id": "0c4f4ce2-e272-4153-860b-a8307090116b",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.deepseek.com/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "deepSeekApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": {{ JSON.stringify($('On form submission').item.json.Model || 'deepseek-v4-flash') }},\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": {{ JSON.stringify($json.system_prompt + (['中文', 'English'].includes($('On form submission').item.json.Language) ? '\\n\\n---\\n\\n**输出语言要求：请始终用 ' + $('On form submission').item.json.Language + ' 回答用户。** (Always respond in ' + $('On form submission').item.json.Language + '.)' : '')) }}\n    },\n    {\n      \"role\": \"user\",\n      \"content\": {{ JSON.stringify($('On form submission').item.json.Question) }}\n    }\n  ],\n  \"stream\": false\n}",
+        "options": {}
+      },
+      "id": "e09ecf9a-d925-4359-8c7f-1f1b9f32a613",
+      "name": "Call Deepseek",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        656,
+        -304
+      ],
+      "credentials": {
+        "deepSeekApi": {
+          "id": "fygmrozJrVpjsyC0",
+          "name": "llm-deepseek"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "respondWith": "showText",
+        "responseText": "={{ $json.formSubmittedText }}"
+      },
+      "id": "707a53bb-5627-4a36-bf55-feba1ffaee26",
+      "name": "Form Ending",
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        1136,
+        -304
+      ],
+      "webhookId": "ec0d27a0-97d0-4dc5-ac24-74e185f7b9cd"
+    },
+    {
+      "parameters": {
+        "jsCode": "// MML 「静水深流」品牌风格 HTML 渲染（inline style 版）\nconst raw = $input.first().json.choices[0].message.content || '';\nconst formMeta = $('On form submission').first().json;\n\nconst esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nfunction md2html(raw) {\n  let h = esc(raw);\n  h = h.replace(/^#### (.*)$/gm, '<h4>$1</h4>');\n  h = h.replace(/^### (.*)$/gm, '<h3>$1</h3>');\n  h = h.replace(/^## (.*)$/gm, '<h2>$1</h2>');\n  h = h.replace(/^# (.*)$/gm, '<h1>$1</h1>');\n  h = h.replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>');\n  h = h.replace(/(^|[^*])\\*([^*\\n]+?)\\*([^*]|$)/g, '$1<em>$2</em>$3');\n  h = h.replace(/`([^`\\n]+)`/g, '<code>$1</code>');\n  h = h.replace(/^> (.*)$/gm, '<blockquote>$1</blockquote>');\n  h = h.replace(/^(?:- |\\* )(.*)$/gm, '<li>$1</li>');\n  h = h.replace(/(<li>[\\s\\S]*?<\\/li>)(?!\\s*<li>)/g, '<ul>$1</ul>');\n  return h.split(/\\n{2,}/).map(b => {\n    if (/^<(h\\d|ul|blockquote)/i.test(b.trim())) return b;\n    return '<p>' + b.replace(/\\n/g, '<br/>') + '</p>';\n  }).join('\\n');\n}\n\nconst skillName = (formMeta.Skill || '').replace(/-perspective$/, '').replace(/-/g, ' ');\n\nconst eyebrowStyle = \"font-family:'SF Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3A78C2\";\nconst nameStyle = \"font-family:Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0;text-transform:capitalize;color:#1A1D20;font-size:13px;padding-left:4px\";\nconst proseStyle = \"font-size:16px;line-height:1.75;color:#4A5057;max-width:62ch\";\n\nconst body = `<div style=\"max-width:880px;margin:60px auto;padding:0 24px;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;color:#1A1D20;line-height:1.7\"><article style=\"background:#fff;border:1px solid #ECEEE8;border-radius:16px;box-shadow:0 1px 2px rgba(16,24,40,0.04),0 6px 16px -4px rgba(16,24,40,0.06);overflow:hidden;position:relative\"><div style=\"height:4px;background:linear-gradient(120deg,#4A90D9 0%,#6FC9E8 35%,#B4A7E8 68%,#F0B4D8 100%)\"></div><div style=\"padding:56px 64px 48px\"><div style=\"${eyebrowStyle};margin:0 0 18px\">PERSPECTIVE · <em style=\"${nameStyle}\">${esc(skillName)}</em></div><div style=\"display:flex;flex-wrap:wrap;gap:8px;margin:0 0 32px\"><span style=\"display:inline-block;padding:4px 12px;background:#EBF3FB;color:#2D61A5;border:1px solid rgba(74,144,217,0.18);border-radius:100px;font-size:12px;font-weight:500;font-family:'SF Mono',ui-monospace,monospace\">${esc(formMeta.Provider || '')} · ${esc(formMeta.Model || '')}</span><span style=\"display:inline-block;padding:4px 12px;background:transparent;color:#8B8F86;border:1px solid #DEE0D9;border-radius:100px;font-size:12px;font-weight:500;font-family:'SF Mono',ui-monospace,monospace\">${esc(formMeta.Language || '')}</span></div><blockquote style=\"border-left:2px solid #4A90D9;padding:8px 0 8px 20px;margin:0 0 40px;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:19px;line-height:1.55;color:#1A1D20\">${esc(formMeta.Question || '')}</blockquote><div style=\"${proseStyle}\">${md2html(raw)}</div><div style=\"display:flex;align-items:center;gap:16px;margin:48px 0 0;padding-top:28px;border-top:1px solid #E2E4DD\"><span style=\"flex:1;height:1px;background:#E2E4DD\"></span><span style=\"font-family:Georgia,serif;font-style:italic;font-size:12px;color:#8B8F86\">慢慢来 · 静水深流</span><span style=\"flex:1;height:1px;background:#E2E4DD\"></span></div></div></article></div>`;\n\nreturn [{ json: { formSubmittedText: body } }];"
+      },
+      "id": "e83f62b0-5fc7-4df6-b337-90735e8b1734",
+      "name": "Format Answer",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        -304
+      ]
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Call Deepseek",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Deepseek": {
+      "main": [
+        [
+          {
+            "node": "Format Answer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Answer": {
+      "main": [
+        [
+          {
+            "node": "Form Ending",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  }
+}

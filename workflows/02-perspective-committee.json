@@ -1,0 +1,609 @@
+{
+  "name": "02-perspective-committee",
+  "nodes": [
+    {
+      "id": "form-trigger-1",
+      "name": "On form submission",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "formTitle": "Perspective 委员会",
+        "formDescription": "选 2-5 位思维顾问，同一个问题，他们各自独立回答；最后一位中立综合者提炼共识、分歧与行动。",
+        "responseMode": "lastNode",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Question",
+              "fieldType": "textarea",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Perspective1",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "steve-jobs-perspective"
+                  },
+                  {
+                    "option": "elon-musk-perspective"
+                  },
+                  {
+                    "option": "munger-perspective"
+                  },
+                  {
+                    "option": "naval-perspective"
+                  },
+                  {
+                    "option": "taleb-perspective"
+                  },
+                  {
+                    "option": "feynman-perspective"
+                  },
+                  {
+                    "option": "paul-graham-perspective"
+                  },
+                  {
+                    "option": "andrej-karpathy-perspective"
+                  },
+                  {
+                    "option": "ilya-sutskever-perspective"
+                  },
+                  {
+                    "option": "mrbeast-perspective"
+                  },
+                  {
+                    "option": "zhang-yiming-perspective"
+                  },
+                  {
+                    "option": "zhangxuefeng-perspective"
+                  },
+                  {
+                    "option": "sun-yuchen-perspective"
+                  },
+                  {
+                    "option": "trump-perspective"
+                  },
+                  {
+                    "option": "x-mastery-mentor"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Perspective2",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "(不用)"
+                  },
+                  {
+                    "option": "steve-jobs-perspective"
+                  },
+                  {
+                    "option": "elon-musk-perspective"
+                  },
+                  {
+                    "option": "munger-perspective"
+                  },
+                  {
+                    "option": "naval-perspective"
+                  },
+                  {
+                    "option": "taleb-perspective"
+                  },
+                  {
+                    "option": "feynman-perspective"
+                  },
+                  {
+                    "option": "paul-graham-perspective"
+                  },
+                  {
+                    "option": "andrej-karpathy-perspective"
+                  },
+                  {
+                    "option": "ilya-sutskever-perspective"
+                  },
+                  {
+                    "option": "mrbeast-perspective"
+                  },
+                  {
+                    "option": "zhang-yiming-perspective"
+                  },
+                  {
+                    "option": "zhangxuefeng-perspective"
+                  },
+                  {
+                    "option": "sun-yuchen-perspective"
+                  },
+                  {
+                    "option": "trump-perspective"
+                  },
+                  {
+                    "option": "x-mastery-mentor"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Perspective3",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "(不用)"
+                  },
+                  {
+                    "option": "steve-jobs-perspective"
+                  },
+                  {
+                    "option": "elon-musk-perspective"
+                  },
+                  {
+                    "option": "munger-perspective"
+                  },
+                  {
+                    "option": "naval-perspective"
+                  },
+                  {
+                    "option": "taleb-perspective"
+                  },
+                  {
+                    "option": "feynman-perspective"
+                  },
+                  {
+                    "option": "paul-graham-perspective"
+                  },
+                  {
+                    "option": "andrej-karpathy-perspective"
+                  },
+                  {
+                    "option": "ilya-sutskever-perspective"
+                  },
+                  {
+                    "option": "mrbeast-perspective"
+                  },
+                  {
+                    "option": "zhang-yiming-perspective"
+                  },
+                  {
+                    "option": "zhangxuefeng-perspective"
+                  },
+                  {
+                    "option": "sun-yuchen-perspective"
+                  },
+                  {
+                    "option": "trump-perspective"
+                  },
+                  {
+                    "option": "x-mastery-mentor"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Perspective4",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "(不用)"
+                  },
+                  {
+                    "option": "steve-jobs-perspective"
+                  },
+                  {
+                    "option": "elon-musk-perspective"
+                  },
+                  {
+                    "option": "munger-perspective"
+                  },
+                  {
+                    "option": "naval-perspective"
+                  },
+                  {
+                    "option": "taleb-perspective"
+                  },
+                  {
+                    "option": "feynman-perspective"
+                  },
+                  {
+                    "option": "paul-graham-perspective"
+                  },
+                  {
+                    "option": "andrej-karpathy-perspective"
+                  },
+                  {
+                    "option": "ilya-sutskever-perspective"
+                  },
+                  {
+                    "option": "mrbeast-perspective"
+                  },
+                  {
+                    "option": "zhang-yiming-perspective"
+                  },
+                  {
+                    "option": "zhangxuefeng-perspective"
+                  },
+                  {
+                    "option": "sun-yuchen-perspective"
+                  },
+                  {
+                    "option": "trump-perspective"
+                  },
+                  {
+                    "option": "x-mastery-mentor"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Perspective5",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "(不用)"
+                  },
+                  {
+                    "option": "steve-jobs-perspective"
+                  },
+                  {
+                    "option": "elon-musk-perspective"
+                  },
+                  {
+                    "option": "munger-perspective"
+                  },
+                  {
+                    "option": "naval-perspective"
+                  },
+                  {
+                    "option": "taleb-perspective"
+                  },
+                  {
+                    "option": "feynman-perspective"
+                  },
+                  {
+                    "option": "paul-graham-perspective"
+                  },
+                  {
+                    "option": "andrej-karpathy-perspective"
+                  },
+                  {
+                    "option": "ilya-sutskever-perspective"
+                  },
+                  {
+                    "option": "mrbeast-perspective"
+                  },
+                  {
+                    "option": "zhang-yiming-perspective"
+                  },
+                  {
+                    "option": "zhangxuefeng-perspective"
+                  },
+                  {
+                    "option": "sun-yuchen-perspective"
+                  },
+                  {
+                    "option": "trump-perspective"
+                  },
+                  {
+                    "option": "x-mastery-mentor"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Language",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "中文"
+                  },
+                  {
+                    "option": "English"
+                  },
+                  {
+                    "option": "Auto"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Model",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "deepseek-v4-flash"
+                  },
+                  {
+                    "option": "deepseek-v4-pro"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {
+          "path": "committee",
+          "buttonLabel": "召集委员会"
+        }
+      },
+      "webhookId": "207e210e-51fc-4568-a6ce-b6f4007120d5"
+    },
+    {
+      "id": "split-perspectives",
+      "name": "Split Perspectives",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const form = $input.first().json;\nconst raw = [form.Perspective1, form.Perspective2, form.Perspective3, form.Perspective4, form.Perspective5];\nconst skills = raw.filter(s => s && s !== '(不用)' && s !== '');\n// 去重\nconst unique = [...new Set(skills)];\nreturn unique.map(skill => ({ json: { currentSkill: skill, Question: form.Question, Language: form.Language, Model: form.Model } }));"
+      }
+    },
+    {
+      "id": "load-skill",
+      "name": "Load Skill",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "url": "=https://raw.githubusercontent.com/tommyso24/N8N-learning/main/skills-registry/{{ $json.currentSkill }}.json",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "call-llm",
+      "name": "Call LLM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.deepseek.com/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "deepSeekApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": {{ JSON.stringify($('On form submission').first().json.Model || 'deepseek-v4-flash') }},\n  \"messages\": [\n    { \"role\": \"system\", \"content\": {{ JSON.stringify($json.system_prompt + (['中文', 'English'].includes($('On form submission').first().json.Language) ? '\\n\\n---\\n\\n**输出语言**：' + $('On form submission').first().json.Language : '')) }} },\n    { \"role\": \"user\", \"content\": {{ JSON.stringify($('On form submission').first().json.Question) }} }\n  ],\n  \"stream\": false\n}",
+        "options": {}
+      },
+      "credentials": {
+        "deepSeekApi": {
+          "id": "fygmrozJrVpjsyC0",
+          "name": "llm-deepseek"
+        }
+      }
+    },
+    {
+      "id": "extract-answer",
+      "name": "Extract Answer",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const answer = $json.choices[0].message.content;\nconst skill = $('Split Perspectives').item.json.currentSkill;\nreturn { skill, answer };",
+        "mode": "runOnceForEachItem"
+      }
+    },
+    {
+      "id": "aggregate",
+      "name": "Aggregate Answers",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        0
+      ],
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "perspectives",
+        "include": "allFields"
+      }
+    },
+    {
+      "id": "build-synth-prompt",
+      "name": "Build Synthesizer Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const form = $('On form submission').first().json;\nconst perspectives = $input.first().json.perspectives || [];\nconst names = perspectives.map(p => p.skill.replace(/-perspective$/, '').replace(/-/g, ' ')).join('、');\nconst lang = ['中文', 'English'].includes(form.Language) ? form.Language : '中文';\n\nconst systemPrompt = `你是一个中立、冷静的综合分析师。\n用户向 ${perspectives.length} 位思维顾问（${names}）提了同一个问题，已收到他们各自独立的回答。\n\n你的任务，严格按下面三节输出：\n\n## 共识\n提炼 2-4 条所有人在不同表述中都指向的核心观点。\n\n## 分歧\n列出 2-3 个最值得提问者深思的视角对撞（不是表达差异，是理念或优先级上的真正分歧）。\n\n## 给提问者的行动建议\n综合所有视角，给 3 条最务实、可立即执行的下一步动作。\n\n输出要求：\n- 不要逐一复述每个人说了什么（用户已看过）\n- 每节用 ## 标题\n- 文字米其林、冷静、不调情\n- 输出语言：${lang}`;\n\nconst block = perspectives.map((p, i) => {\n  const name = p.skill.replace(/-perspective$/, '').replace(/-/g, ' ');\n  return `### ${i + 1}、${name}\\n\\n${p.answer}`;\n}).join('\\n\\n---\\n\\n');\n\nconst userMessage = `**原始问题**\\n\\n${form.Question}\\n\\n---\\n\\n**${perspectives.length} 位思维顾问的回答**\\n\\n${block}\\n\\n---\\n\\n请按上述要求给出综合分析。`;\n\nreturn [{ json: { systemPrompt, userMessage, perspectives, form } }];"
+      }
+    },
+    {
+      "id": "call-synth",
+      "name": "Call Synthesizer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1680,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.deepseek.com/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "deepSeekApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": {{ JSON.stringify($json.form.Model || 'deepseek-v4-flash') }},\n  \"messages\": [\n    { \"role\": \"system\", \"content\": {{ JSON.stringify($json.systemPrompt) }} },\n    { \"role\": \"user\", \"content\": {{ JSON.stringify($json.userMessage) }} }\n  ],\n  \"stream\": false\n}",
+        "options": {}
+      },
+      "credentials": {
+        "deepSeekApi": {
+          "id": "fygmrozJrVpjsyC0",
+          "name": "llm-deepseek"
+        }
+      }
+    },
+    {
+      "id": "format-result",
+      "name": "Format Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1920,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const synthesis = $input.first().json.choices[0].message.content;\nconst ctx = $('Build Synthesizer Prompt').first().json;\nconst form = ctx.form;\nconst perspectives = ctx.perspectives;\n\nconst esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nfunction md2html(raw) {\n  let h = esc(raw);\n  h = h.replace(/^#### (.*)$/gm, '<h4>$1</h4>');\n  h = h.replace(/^### (.*)$/gm, '<h3>$1</h3>');\n  h = h.replace(/^## (.*)$/gm, '<h2>$1</h2>');\n  h = h.replace(/^# (.*)$/gm, '<h1>$1</h1>');\n  h = h.replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>');\n  h = h.replace(/(^|[^*])\\*([^*\\n]+?)\\*([^*]|$)/g, '$1<em>$2</em>$3');\n  h = h.replace(/`([^`\\n]+)`/g, '<code>$1</code>');\n  h = h.replace(/^> (.*)$/gm, '<blockquote>$1</blockquote>');\n  h = h.replace(/^(?:- |\\* )(.*)$/gm, '<li>$1</li>');\n  h = h.replace(/(<li>[\\s\\S]*?<\\/li>)(?!\\s*<li>)/g, '<ul>$1</ul>');\n  return h.split(/\\n{2,}/).map(b => {\n    if (/^<(h\\d|ul|blockquote)/i.test(b.trim())) return b;\n    return '<p>' + b.replace(/\\n/g, '<br/>') + '</p>';\n  }).join('\\n');\n}\n\nconst eyebrowStyle = \"font-family:'SF Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3A78C2\";\nconst nameStyle = \"font-family:Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0;text-transform:capitalize;color:#1A1D20;font-size:13px;padding-left:4px\";\nconst proseStyle = \"font-size:15px;line-height:1.75;color:#4A5057;max-width:62ch\";\nconst proseStyleBig = \"font-size:16px;line-height:1.75;color:#1A1D20;max-width:62ch\";\n\nconst perspectiveCards = perspectives.map(p => {\n  const name = p.skill.replace(/-perspective$/, '').replace(/-/g, ' ');\n  return `<div style=\"background:#fff;border:1px solid #ECEEE8;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,0.04);padding:32px 36px;margin-bottom:16px\"><div style=\"${eyebrowStyle};margin:0 0 14px\">PERSPECTIVE · <em style=\"${nameStyle}\">${esc(name)}</em></div><div style=\"${proseStyle}\">${md2html(p.answer)}</div></div>`;\n}).join('');\n\nconst synthesisCard = `<div style=\"background:#fff;border:1px solid rgba(74,144,217,0.18);border-radius:14px;box-shadow:0 6px 20px -6px rgba(74,144,217,0.18);padding:36px 36px 32px;position:relative;overflow:hidden;margin-top:32px\"><div style=\"height:4px;background:linear-gradient(120deg,#4A90D9 0%,#6FC9E8 35%,#B4A7E8 68%,#F0B4D8 100%);position:absolute;top:0;left:0;right:0\"></div><div style=\"${eyebrowStyle};margin:10px 0 18px\">SYNTHESIS · <em style=\"${nameStyle}\">委员会综合</em></div><div style=\"${proseStyleBig}\">${md2html(synthesis)}</div></div>`;\n\nconst body = `<div style=\"max-width:880px;margin:60px auto;padding:0 24px;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;color:#1A1D20;line-height:1.7\"><div style=\"margin-bottom:32px\"><div style=\"${eyebrowStyle};margin:0 0 12px\">COMMITTEE · ${perspectives.length} VOICES</div><blockquote style=\"border-left:2px solid #4A90D9;padding:8px 0 8px 20px;margin:0;font-family:Georgia,serif;font-style:italic;font-size:21px;line-height:1.5;color:#1A1D20\">${esc(form.Question)}</blockquote></div>${perspectiveCards}${synthesisCard}<div style=\"display:flex;align-items:center;gap:16px;margin:40px 0 0;padding-top:28px;border-top:1px solid #E2E4DD\"><span style=\"flex:1;height:1px;background:#E2E4DD\"></span><span style=\"font-family:Georgia,serif;font-style:italic;font-size:12px;color:#8B8F86\">慢慢来 · 静水深流</span><span style=\"flex:1;height:1px;background:#E2E4DD\"></span></div></div>`;\n\nreturn [{ json: { formSubmittedText: body } }];"
+      }
+    },
+    {
+      "id": "form-ending",
+      "name": "Form Ending",
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        2160,
+        0
+      ],
+      "parameters": {
+        "operation": "completion",
+        "respondWith": "showText",
+        "responseText": "={{ $json.formSubmittedText }}"
+      },
+      "webhookId": "3b7d95aa-62ee-4245-940d-6858b9c1d202"
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Split Perspectives",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Perspectives": {
+      "main": [
+        [
+          {
+            "node": "Load Skill",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Skill": {
+      "main": [
+        [
+          {
+            "node": "Call LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call LLM": {
+      "main": [
+        [
+          {
+            "node": "Extract Answer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Answer": {
+      "main": [
+        [
+          {
+            "node": "Aggregate Answers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate Answers": {
+      "main": [
+        [
+          {
+            "node": "Build Synthesizer Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Synthesizer Prompt": {
+      "main": [
+        [
+          {
+            "node": "Call Synthesizer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Synthesizer": {
+      "main": [
+        [
+          {
+            "node": "Format Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Result": {
+      "main": [
+        [
+          {
+            "node": "Form Ending",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

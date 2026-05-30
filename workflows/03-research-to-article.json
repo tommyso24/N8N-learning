@@ -1,0 +1,498 @@
+{
+  "name": "03-research-to-article",
+  "nodes": [
+    {
+      "id": "form-trigger",
+      "name": "On form submission",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "formTitle": "Research → Article",
+        "formDescription": "丢一个主题，多路搜索→深度研究→公众号长文。预计 1-3 分钟。",
+        "responseMode": "onReceived",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Topic",
+              "fieldType": "textarea",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Depth",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "标准 (5 路搜索)"
+                  },
+                  {
+                    "option": "简略 (3 路搜索)"
+                  },
+                  {
+                    "option": "深度 (8 路搜索)"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Output",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "两者都要"
+                  },
+                  {
+                    "option": "仅研究"
+                  },
+                  {
+                    "option": "仅文章"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Language",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "中文"
+                  },
+                  {
+                    "option": "English"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Model",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "deepseek-v4-flash"
+                  },
+                  {
+                    "option": "deepseek-v4-pro"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {
+          "path": "research",
+          "buttonLabel": "启动研究",
+          "respondWithOptions": {
+            "values": {
+              "respondWith": "text",
+              "formSubmittedText": "已接收。研究流程已启动，预计 1-3 分钟内完成后结果会发送到 cntomso@gmail.com。可以关闭这个页面了。"
+            }
+          }
+        }
+      },
+      "webhookId": "756f3cf0-9f43-4dd9-9837-523d4c5d6bae"
+    },
+    {
+      "id": "build-queries",
+      "name": "Build Search Queries",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const form = $input.first().json;\nconst topic = form.Topic;\nconst depth = form.Depth || '标准 (5 路搜索)';\nconst n = depth.startsWith('简略') ? 3 : depth.startsWith('深度') ? 8 : 5;\n\nconst queriesBy = {\n  3: [\n    `${topic} 是什么 介绍`,\n    `${topic} 最新进展 2026`,\n    `${topic} 竞品 对比`\n  ],\n  5: [\n    `${topic} 是什么 介绍`,\n    `${topic} 历史 发展`,\n    `${topic} 最新进展 2026`,\n    `${topic} 竞品 对比`,\n    `${topic} 优势 劣势 评价`\n  ],\n  8: [\n    `${topic} 是什么 介绍`,\n    `${topic} 历史 起源 发展`,\n    `${topic} 最新进展 2026`,\n    `${topic} 技术原理 实现`,\n    `${topic} 商业模式 盈利`,\n    `${topic} 竞品 对比 替代`,\n    `${topic} 优势 劣势 用户评价`,\n    `${topic} 未来 趋势 预测`\n  ]\n};\n\nconst list = queriesBy[n];\nreturn list.map(q => ({ json: { query: q } }));"
+      }
+    },
+    {
+      "id": "tavily-search",
+      "name": "Tavily Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": {{ JSON.stringify($json.query) }},\n  \"search_depth\": \"basic\",\n  \"max_results\": 5,\n  \"include_answer\": false,\n  \"include_raw_content\": false\n}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "XBIn0FFlRHgQeIqM",
+          "name": "tavily-search"
+        }
+      }
+    },
+    {
+      "id": "extract-results",
+      "name": "Extract Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const query = $('Build Search Queries').item.json.query;\nconst results = ($json.results || []).map(r => ({\n  title: r.title,\n  url: r.url,\n  content: r.content ? String(r.content).slice(0, 800) : '',\n  score: r.score\n}));\nreturn { query, results };"
+      }
+    },
+    {
+      "id": "aggregate-research",
+      "name": "Aggregate Research",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        960,
+        0
+      ],
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "searches",
+        "include": "allFields"
+      }
+    },
+    {
+      "id": "load-hv",
+      "name": "Load hv-analysis Skill",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1200,
+        0
+      ],
+      "parameters": {
+        "url": "https://raw.githubusercontent.com/tommyso24/N8N-learning/main/skills-registry/hv-analysis.json",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "build-hv-prompt",
+      "name": "Build hv-analysis Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const skill = $input.first().json;\nconst form = $('On form submission').first().json;\nconst searches = $('Aggregate Research').first().json.searches || [];\n\nconst lang = form.Language || '中文';\n\nconst block = searches.map((s, i) => {\n  const items = (s.results || []).map(r => `- **${r.title}**：${r.content}\\n  来源：${r.url}`).join('\\n');\n  return `### 路搜索 ${i + 1}：${s.query}\\n\\n${items}`;\n}).join('\\n\\n---\\n\\n');\n\nconst systemPrompt = skill.system_prompt + `\\n\\n---\\n\\n**输出语言**：${lang}\\n**重要**：你拿到的是已经收集好的搜索素材，不需要再调外部搜索。在以下素材上执行「纵轴叙事 + 横轴对比 + 交叉洞察」三步分析。PDF 部分跳过，只输出 Markdown 结构化内容。`;\n\nconst userMessage = `**研究主题**\\n${form.Topic}\\n\\n**研究深度**\\n${form.Depth}\\n\\n---\\n\\n**搜索到的素材**\\n\\n${block}\\n\\n---\\n\\n请按 hv-analysis 方法论输出深度研究报告。Markdown 格式。`;\n\nreturn [{ json: { systemPrompt, userMessage } }];"
+      }
+    },
+    {
+      "id": "call-hv",
+      "name": "Call hv-analysis LLM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1680,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.deepseek.com/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "deepSeekApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": {{ JSON.stringify($('On form submission').first().json.Model || 'deepseek-v4-flash') }},\n  \"messages\": [\n    { \"role\": \"system\", \"content\": {{ JSON.stringify($json.systemPrompt) }} },\n    { \"role\": \"user\", \"content\": {{ JSON.stringify($json.userMessage) }} }\n  ],\n  \"stream\": false\n}",
+        "options": {}
+      },
+      "credentials": {
+        "deepSeekApi": {
+          "id": "fygmrozJrVpjsyC0",
+          "name": "llm-deepseek"
+        }
+      }
+    },
+    {
+      "id": "save-research",
+      "name": "Save Research Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1920,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const research = $input.first().json.choices[0].message.content;\nreturn [{ json: { research } }];"
+      }
+    },
+    {
+      "id": "load-writer",
+      "name": "Load khazix-writer Skill",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2160,
+        0
+      ],
+      "parameters": {
+        "url": "https://raw.githubusercontent.com/tommyso24/N8N-learning/main/skills-registry/khazix-writer.json",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "build-writer-prompt",
+      "name": "Build Writer Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2400,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const skill = $input.first().json;\nconst form = $('On form submission').first().json;\nconst research = $('Save Research Output').first().json.research;\n\nconst lang = form.Language || '中文';\n\nconst systemPrompt = skill.system_prompt + `\\n\\n---\\n\\n**输出语言**：${lang}\\n**重要**：你拿到的是已经做好的深度研究报告。不需要再调 WebSearch。直接基于这份研究、按卡兹克的风格写一篇公众号长文。`;\n\nconst userMessage = `**选题**：${form.Topic}\\n\\n**上一步的深度研究报告**：\\n\\n${research}\\n\\n---\\n\\n请基于上面的研究，按卡兹克风格写一篇公众号长文。`;\n\nreturn [{ json: { systemPrompt, userMessage } }];"
+      }
+    },
+    {
+      "id": "call-writer",
+      "name": "Call khazix-writer LLM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2640,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.deepseek.com/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "deepSeekApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": {{ JSON.stringify($('On form submission').first().json.Model || 'deepseek-v4-flash') }},\n  \"messages\": [\n    { \"role\": \"system\", \"content\": {{ JSON.stringify($json.systemPrompt) }} },\n    { \"role\": \"user\", \"content\": {{ JSON.stringify($json.userMessage) }} }\n  ],\n  \"stream\": false\n}",
+        "options": {}
+      },
+      "credentials": {
+        "deepSeekApi": {
+          "id": "fygmrozJrVpjsyC0",
+          "name": "llm-deepseek"
+        }
+      }
+    },
+    {
+      "id": "format-result",
+      "name": "Format Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2880,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const article = $input.first().json.choices[0].message.content;\nconst research = $('Save Research Output').first().json.research;\nconst form = $('On form submission').first().json;\nconst searches = $('Aggregate Research').first().json.searches || [];\n\nconst output = form.Output || '两者都要';\nconst showResearch = output !== '仅文章';\nconst showArticle = output !== '仅研究';\n\nconst esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nfunction md2html(raw) {\n  let h = esc(raw);\n  h = h.replace(/^#### (.*)$/gm, '<h4>$1</h4>');\n  h = h.replace(/^### (.*)$/gm, '<h3>$1</h3>');\n  h = h.replace(/^## (.*)$/gm, '<h2>$1</h2>');\n  h = h.replace(/^# (.*)$/gm, '<h1>$1</h1>');\n  h = h.replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>');\n  h = h.replace(/(^|[^*])\\*([^*\\n]+?)\\*([^*]|$)/g, '$1<em>$2</em>$3');\n  h = h.replace(/`([^`\\n]+)`/g, '<code>$1</code>');\n  h = h.replace(/^> (.*)$/gm, '<blockquote>$1</blockquote>');\n  h = h.replace(/^(?:- |\\* )(.*)$/gm, '<li>$1</li>');\n  h = h.replace(/(<li>[\\s\\S]*?<\\/li>)(?!\\s*<li>)/g, '<ul>$1</ul>');\n  return h.split(/\\n{2,}/).map(b => {\n    if (/^<(h\\d|ul|blockquote)/i.test(b.trim())) return b;\n    return '<p>' + b.replace(/\\n/g, '<br/>') + '</p>';\n  }).join('\\n');\n}\n\nconst eyebrowStyle = \"font-family:'SF Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#3A78C2\";\nconst nameStyle = \"font-family:Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0;text-transform:capitalize;color:#1A1D20;font-size:13px;padding-left:4px\";\nconst proseStyle = \"font-size:16px;line-height:1.75;color:#4A5057;max-width:62ch\";\n\nconst sourcesList = searches.flatMap(s => s.results || []).map(r => `<li style=\"margin:4px 0\"><a href=\"${esc(r.url)}\" target=\"_blank\" style=\"color:#3A78C2;text-decoration:none;font-size:13px\">${esc(r.title)}</a></li>`).join('');\n\nconst researchCard = showResearch ? `<article style=\"background:#fff;border:1px solid #ECEEE8;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,0.04);padding:36px 40px;margin-bottom:24px;position:relative;overflow:hidden\"><div style=\"height:4px;background:linear-gradient(120deg,#4A90D9 0%,#6FC9E8 35%,#B4A7E8 68%,#F0B4D8 100%);position:absolute;top:0;left:0;right:0\"></div><div style=\"${eyebrowStyle};margin:8px 0 14px\">RESEARCH · <em style=\"${nameStyle}\">hv-analysis</em></div><div style=\"${proseStyle}\">${md2html(research)}</div><details style=\"margin-top:24px;padding-top:18px;border-top:1px solid #E2E4DD\"><summary style=\"cursor:pointer;${eyebrowStyle};margin:0 0 12px\">SOURCES · ${searches.reduce((n, s) => n + (s.results || []).length, 0)} 条</summary><ul style=\"padding-left:20px;margin:8px 0 0\">${sourcesList}</ul></details></article>` : '';\n\nconst articleCard = showArticle ? `<article style=\"background:#fff;border:1px solid #ECEEE8;border-radius:14px;box-shadow:0 6px 20px -6px rgba(16,24,40,0.08);padding:48px 56px\"><div style=\"${eyebrowStyle};margin:0 0 14px\">ARTICLE · <em style=\"${nameStyle}\">khazix-writer</em></div><div style=\"${proseStyle}\">${md2html(article)}</div></article>` : '';\n\nconst body = `<div style=\"max-width:880px;margin:60px auto;padding:0 24px;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;color:#1A1D20;line-height:1.7\"><div style=\"margin-bottom:32px\"><div style=\"${eyebrowStyle};margin:0 0 12px\">TOPIC · ${esc(form.Depth)}</div><blockquote style=\"border-left:2px solid #4A90D9;padding:8px 0 8px 20px;margin:0;font-family:Georgia,serif;font-style:italic;font-size:21px;line-height:1.5;color:#1A1D20\">${esc(form.Topic)}</blockquote></div>${researchCard}${articleCard}<div style=\"display:flex;align-items:center;gap:16px;margin:40px 0 0;padding-top:28px;border-top:1px solid #E2E4DD\"><span style=\"flex:1;height:1px;background:#E2E4DD\"></span><span style=\"font-family:Georgia,serif;font-style:italic;font-size:12px;color:#8B8F86\">慢慢来 · 静水深流</span><span style=\"flex:1;height:1px;background:#E2E4DD\"></span></div></div>`;\n\nreturn [{ json: { formSubmittedText: body } }];"
+      }
+    },
+    {
+      "id": "5ddb3d5c-63a7-45ab-9798-2bfb841a9ab2",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        3120,
+        0
+      ],
+      "parameters": {
+        "fromEmail": "Tommy MML <cntomso@gmail.com>",
+        "toEmail": "cntomso@gmail.com",
+        "subject": "=[研究] {{ $('On form submission').first().json.Topic }} · {{ $('On form submission').first().json.Depth }}",
+        "emailFormat": "html",
+        "html": "={{ $json.formSubmittedText }}",
+        "options": {}
+      },
+      "credentials": {
+        "smtp": {
+          "id": "GnlDj7BSGOz1Fm43",
+          "name": "gmail-smtp"
+        }
+      },
+      "webhookId": "f625abae-9fc0-4b1c-964f-4d2b9914d921"
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Build Search Queries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Search Queries": {
+      "main": [
+        [
+          {
+            "node": "Tavily Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tavily Search": {
+      "main": [
+        [
+          {
+            "node": "Extract Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Results": {
+      "main": [
+        [
+          {
+            "node": "Aggregate Research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate Research": {
+      "main": [
+        [
+          {
+            "node": "Load hv-analysis Skill",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load hv-analysis Skill": {
+      "main": [
+        [
+          {
+            "node": "Build hv-analysis Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build hv-analysis Prompt": {
+      "main": [
+        [
+          {
+            "node": "Call hv-analysis LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call hv-analysis LLM": {
+      "main": [
+        [
+          {
+            "node": "Save Research Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Research Output": {
+      "main": [
+        [
+          {
+            "node": "Load khazix-writer Skill",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load khazix-writer Skill": {
+      "main": [
+        [
+          {
+            "node": "Build Writer Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Writer Prompt": {
+      "main": [
+        [
+          {
+            "node": "Call khazix-writer LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call khazix-writer LLM": {
+      "main": [
+        [
+          {
+            "node": "Format Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Result": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "executionTimeout": 600
+  }
+}
